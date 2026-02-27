@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDC Pinturas | Transformando Ambientes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navegação */
+        nav {
+            background: #1a1a2e;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* Hero - Casa pintada */
+        .hero {
+            background: linear-gradient(rgba(26,26,46,0.7), rgba(26,26,46,0.8)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #d4af37;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        /* Seções */
+        section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Serviços */
+        .services {
+            background: #f5f5f5;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid #d4af37;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+            font-size: 1.3rem;
+        }
+
+        /* Portfólio - Efeitos especiais */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 4/3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26,26,46,0.95), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Contato */
+        .contact {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: #d4af37;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            color: #d4af37;
+        }
+
+        .contact-item i {
+            color: #d4af37;
+            font-size: 2rem;
+        }
+
+        .contact-item span {
+            font-size: 1.1rem;
+        }
+
+        .instagram-box {
+            background: linear-gradient(45deg, rgba(240,148,51,0.2), rgba(188,24,136,0.2));
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: inline-block;
+        }
+
+        .instagram-box i {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #f09433, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-paint-roller"></i> JDC Pinturas</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero - Casa bonita pintada -->
+    <section class="hero" id="inicio">
+        <div>
+            <h1>Transformamos Ambientes em Arte</h1>
+            <p>Especialistas em pintura decorativa, texturas e efeitos especiais em Brasília</p>
+            <a href="https://wa.me/5561996931992" class="btn"><i class="fab fa-whatsapp"></i> Solicite um Orçamento</a>
+            <a href="https://instagram.com/jdc_pinturas" class="btn btn-instagram"><i class="fab fa-instagram"></i> @jdc_pinturas</a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="services" id="servicos">
+        <h2>Nossos Serviços</h2>
+        <p class="section-subtitle">Técnicas exclusivas para transformar seu ambiente</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-spray-can"></i>
+                <h3>Pintura Decorativa</h3>
+                <p>Acabamentos de alto padrão com técnicas modernas e materiais premium para um resultado impecável.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>Texturas & Efeitos</h3>
+                <p>Grafiato, cimento queimado, pedra natural e efeitos especiais que valorizam qualquer ambiente.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-home"></i>
+                <h3>Pintura Residencial</h3>
+                <p>Qualidade e durabilidade para sua casa, com as melhores tintas do mercado e garantia de satisfação.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio - Efeitos reais de pintura -->
+    <section id="portfolio">
+        <h2>Nossos Trabalhos</h2>
+        <p class="section-subtitle">Conheça alguns dos nossos efeitos especiais</p>
+        <div class="portfolio-grid">
+            
+            <!-- Grafiato -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=600" alt="Grafiato">
+                <div class="portfolio-overlay">
+                    <h3><i class="fas fa-square"></i> Grafiato</h3>
+                    <p>Textura rústica e elegante para ambientes internos e externos</p>
+                </div>
+            </div>
+
+            <!-- Cimento Queimado -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600" alt="Cimento Queimado">
+                <div class="portfolio-overlay">
+                    <h3><i class="fas fa-industry"></i> Cimento Queimado</h3>
+                    <p>Estilo industrial sofisticado e moderno</p>
+                </div>
+            </div>
+
+            <!-- Pedra Natural -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600" alt="Pedra Natural">
+                <div class="portfolio-overlay">
+                    <h3><i class="fas fa-mountain"></i> Pedra Natural</h3>
+                    <p>Efeito pedra rústica com aparência autêntica</p>
+                </div>
+            </div>
+
+            <!-- Marmorizado Carrara -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=600" alt="Mármore Carrara">
+                <div class="portfolio-overlay">
+                    <h3><i class="fas fa-gem"></i> Marmorizado Carrara</h3>
+                    <p>Elegância do mármore branco italiano</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contact" id="contato">
+        <h2>Entre em Contato</h2>
+        <p>Pronto para transformar seu ambiente? Fale conosco!</p>
+        
+        <div class="contact-info">
+            <a href="https://wa.me/5561996931992" class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>(61) 99693-1992</span>
+            </a>
+            
+            <a href="mailto:contato@jdcpinturas.com" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>contato@jdcpinturas.com</span>
+            </a>
+            
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Brasília - DF</span>
+            </div>
+        </div>
+
+        <div class="instagram-box">
+            <i class="fab fa-instagram"></i>
+            <h3>Siga-nos no Instagram</h3>
+            <p><a href="https://instagram.com/jdc_pinturas" style="color: #d4af37; font-size: 1.3rem; font-weight: bold;">@jdc_pinturas</a></p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Acompanhe nossos projetos em tempo real</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 JDC Pinturas. Todos os direitos reservados.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+            Desenvolvido com <i class="fas fa-heart" style="color: #d4af37;"></i> em Brasília
+        </p>
+    </footer>
+
+</body>
+</html>
